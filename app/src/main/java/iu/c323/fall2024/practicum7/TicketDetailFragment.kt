@@ -7,8 +7,9 @@ import android.view.ViewGroup
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import iu.c323.fall2024.practicum7.databinding.FragmentTicketDetailBinding
-import java.util.Date
 import java.util.UUID
+import android.text.format.DateFormat
+import java.util.Date
 
 class TicketDetailFragment : Fragment() {
     private var _binding: FragmentTicketDetailBinding? = null
@@ -17,13 +18,16 @@ class TicketDetailFragment : Fragment() {
     }
     private lateinit var ticket: Ticket
 
+    fun formatSimpleDate(date: Date): String {
+        return DateFormat.format("MMMM d, yyyy", date).toString()
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         ticket = Ticket(
             id = UUID.randomUUID(),
             title = "",
-            date = Date(),
+            date = formatSimpleDate(Date()),
             isSolved = false
         )
     }
