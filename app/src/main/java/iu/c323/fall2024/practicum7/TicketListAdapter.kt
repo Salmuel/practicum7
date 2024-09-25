@@ -1,6 +1,7 @@
 package iu.c323.fall2024.practicum7
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import iu.c323.fall2024.practicum7.databinding.ListItemTicketBinding
@@ -21,6 +22,11 @@ class TicketHolder(
             ).show()
         }
 
+        binding.ticketSolved.visibility = if (ticket.isSolved)  {
+            View.VISIBLE
+        } else {
+            View.GONE
+        }
     }
 }
 
