@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import iu.c323.fall2024.practicum7.databinding.ListItemTicketBinding
 import android.widget.Toast
+
 /**changes**/
 class TicketHolder(
     val binding: ListItemTicketBinding
