@@ -9,9 +9,13 @@ import androidx.fragment.app.Fragment
 import iu.c323.fall2024.practicum7.databinding.FragmentTicketDetailBinding
 import java.util.UUID
 import android.text.format.DateFormat
+import android.util.Log
+import androidx.navigation.fragment.navArgs
 import java.util.Date
 
+private const val TAG = "TicketDetailFragment"
 class TicketDetailFragment : Fragment() {
+    private val args:TicketDetailFragmentArgs by navArgs()
     private var _binding: FragmentTicketDetailBinding? = null
     private val binding get() = checkNotNull(_binding) {
         "Cannot access the view because it is null"
@@ -30,6 +34,7 @@ class TicketDetailFragment : Fragment() {
             date = formatSimpleDate(Date()),
             isSolved = false
         )
+        Log.d(TAG, "The ticket id is ${args.ticketId}")
     }
 
     override fun onCreateView(

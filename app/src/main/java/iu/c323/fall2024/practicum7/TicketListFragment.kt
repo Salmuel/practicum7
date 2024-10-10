@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import iu.c323.fall2024.practicum7.databinding.FragmentTicketListBinding
 import kotlinx.coroutines.launch
@@ -35,7 +36,7 @@ class   TicketListFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentTicketListBinding.inflate(inflater, container, false)
         binding.ticketRecyclerView.layoutManager = LinearLayoutManager(context)
         return binding.root
@@ -48,7 +49,10 @@ class   TicketListFragment : Fragment() {
             viewLifecycleOwner.repeatOnLifecycle(
                 Lifecycle.State.STARTED) {
                 ticketListViewModel.tickets.collect{tickets ->
-                    binding.ticketRecyclerView.adapter = TicketListAdapter(tickets)
+                    binding.ticketRecyclerView.adapter = TicketListAdapter(tickets) {
+                        ticketId ->
+                        findNavController().navigate(TicketListFragmentDirections.showTicketDetail(ticketId))
+                    }
                 }
 
             }

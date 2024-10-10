@@ -6,21 +6,17 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import iu.c323.fall2024.practicum7.databinding.ListItemTicketBinding
 import android.widget.Toast
+import java.util.UUID
 
 /**changes**/
-class TicketHolder(
-    val binding: ListItemTicketBinding
-) : RecyclerView.ViewHolder(binding.root) {
-    fun bind(ticket: Ticket) {
+class TicketHolder( private val binding: ListItemTicketBinding)
+    : RecyclerView.ViewHolder(binding.root) {
+    fun bind(ticket: Ticket, onTicketClicked:(ticketId: UUID) -> Unit) {
         binding.ticketTitle.text = ticket.title
         binding.ticketDate.text = ticket.date.toString()
 
         binding.root.setOnClickListener {
-            Toast.makeText(
-                binding.root.context,
-                "${ticket.title} clicked!",
-                Toast.LENGTH_SHORT
-            ).show()
+            onTicketClicked(ticket.id)
         }
 
         binding.ticketSolved.visibility = if (ticket.isSolved)  {
@@ -32,7 +28,8 @@ class TicketHolder(
 }
 
 class TicketListAdapter(
-    private val tickets: List<Ticket>
+    private val tickets: List<Ticket>,
+    private val onTicketClicked: (ticketId: UUID) -> Unit
 ) : RecyclerView.Adapter<TicketHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TicketHolder {
@@ -47,6 +44,6 @@ class TicketListAdapter(
 
     override fun onBindViewHolder(holder: TicketHolder, position: Int) {
         val ticket = tickets[position]
-        holder.bind(ticket)
+        holder.bind(ticket,onTicketClicked)
         }
     }
