@@ -2,8 +2,14 @@
 plugins {
     alias(libs.plugins.android.application) apply false
     alias(libs.plugins.jetbrains.kotlin.android) apply false
-    id("org.jetbrains.kotlin.kapt") version "1.8.20" apply false
-    id("androidx.navigation.safeargs.kotlin") version "2.5.0" apply false
+    id("org.jetbrains.kotlin.kapt") version "1.9.22" apply false
+    id("androidx.navigation.safeargs.kotlin") version "2.7.7" apply false
+}
+
+buildscript {
+    dependencies {
+        classpath("androidx.navigation:navigation-safe-args-gradle-plugin:2.7.7")
+    }
 }
 
 allprojects {

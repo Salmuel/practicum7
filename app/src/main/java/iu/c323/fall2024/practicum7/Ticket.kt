@@ -11,4 +11,8 @@ data class Ticket(
     val date: String,
     val isSolved: Boolean
 
-)
+) {
+    fun collect(function: () -> Unit) {
+
+    }
+}
