@@ -34,4 +34,8 @@
             android:name="ticketDate"
             app:argType="java.util.Date" />
     </dialog>
+    <argument
+        android:name="ticketId"
+        app:argType="java.util.UUID"
+        app:nullable="true" />
 </navigation>

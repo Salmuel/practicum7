@@ -8,9 +8,11 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import java.util.Date
 import java.util.UUID
 
-class TicketDetailViewModel(ticketId: UUID) : ViewModel() {
+class TicketDetailViewModel(ticketId: UUID?) : ViewModel() {
+    private val ticketId = ticketId
     private val ticketRepository = TicketRepository.get()
     private val _ticket: MutableStateFlow<Ticket?> = MutableStateFlow(null)
     val ticket: StateFlow<Ticket?> = _ticket.asStateFlow()
@@ -18,8 +20,12 @@ class TicketDetailViewModel(ticketId: UUID) : ViewModel() {
     init {
         viewModelScope.launch {
             try {
-                ticketRepository.getTicket(ticketId).collect {
-                    _ticket.value = it
+                if (ticketId != null) {
+                    ticketRepository.getTicket(ticketId).collect{
+                        _ticket.value = it
+                    }
+                } else {
+                    _ticket.value = Ticket(UUID.randomUUID(), "", Date().toString(), false)
                 }
             } catch (e: Throwable) {
                 println(e.message)
@@ -35,12 +41,18 @@ class TicketDetailViewModel(ticketId: UUID) : ViewModel() {
 
     override fun onCleared() {
         super.onCleared()
-            _ticket.value?.let { ticketRepository.updateTicket(it) }
+        _ticket.value?.let {
+            if (ticketId != null) {
+                ticketRepository.updateTicket(it)
+            } else {
+                ticketRepository.addTicket(it)
+            }
+        }
     }
 }
 
 class TicketDetailViewModelFactory(
-    private val ticketId: UUID
+    private val ticketId: UUID?
 ) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return TicketDetailViewModel(ticketId) as T

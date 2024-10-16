@@ -1,6 +1,7 @@
 package iu.c323.fall2024.practicum7.database
 
 import androidx.room.Dao
+import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
 import iu.c323.fall2024.practicum7.Ticket
@@ -18,4 +19,7 @@ interface TicketDao {
 
     @Update
     suspend fun updateTicket(ticket: Ticket)
+
+    @Insert
+    fun addTicket(ticket: Ticket)
 }
