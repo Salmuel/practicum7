@@ -38,4 +38,19 @@
         android:layout_height="wrap_content"
         android:text="Solved" />
 
+    <Button
+        android:id= "@+id/ticket_assigneet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/ticket_assignee_text"/>
+
+    <Button
+        android:id= "@+id/ticket_report"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/ticket_report_text"/>
+
+
+
+
 </LinearLayout>

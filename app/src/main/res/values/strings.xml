@@ -5,4 +5,15 @@
     <string name="ticket_details_label">Details</string>
     <string name="ticket_solved_label">Solved</string>
     <string name = "new_ticket">New Ticket</string>
+    <string name = "ticket_assignee_text">Choose Assignee</string>
+    <string name = "ticket_report_text">Send Ticket Report</string>
+    <string name="ticket_report">%1$s!
+    The ticket was submitted on %2$s. %3$s, and %4$s
+    </string>
+    <string name="ticket_report_solved">The ticket is solved</string>
+    <string name="ticket_report_unsolved">The ticket is not solved</string>
+    <string name="ticket_report_no_assignee">there is no assignee.</string>
+    <string name="ticket_report_assignee">the assignee is %s.</string>
+    <string name="ticket_report_subject">ticket Report</string>
+    <string name="send_report">Send ticket report via</string>
 </resources>

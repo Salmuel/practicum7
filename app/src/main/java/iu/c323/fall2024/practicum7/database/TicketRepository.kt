@@ -14,7 +14,9 @@ class TicketRepository private constructor(context: Context) {
         context.applicationContext,
         TicketDatabase::class.java,
         DATABASE_NAME
-    ).build()
+    )
+        .addMigrations(migration_1_2)
+        .build()
 
     private val ticketDao: TicketDao = database.ticketDao()
 
